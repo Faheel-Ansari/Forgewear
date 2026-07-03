@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit"
-import themeReducer from "../features/themeSlice"
+import themeReducer from "../features/ThemeSlice"
 import storeReducer from "../features/StoreSlice"
 import faqReducer from "../features/FAQSlice"
 import authReducer from "../features/AuthSlice"
