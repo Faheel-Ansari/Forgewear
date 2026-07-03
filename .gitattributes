@@ -1,0 +1,17 @@
+# ==========================================
+# GLOBAL SETTINGS
+# ==========================================
+* text=auto eol=lf
+
+# ==========================================
+# BACKEND SPECIFIC (Laravel / PHP)
+# ==========================================
+backend/**/*.blade.php diff=html
+backend/**/*.css diff=css
+backend/**/*.html diff=html
+backend/**/*.md diff=markdown
+backend/**/*.php diff=php
+
+backend/.github export-ignore
+backend/CHANGELOG.md export-ignore
+backend/.styleci.yml export-ignore
