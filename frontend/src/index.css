@@ -1,0 +1,140 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: logoFont;
+  src: url(./assets/fonts/BebasNeue-Regular.woff2);
+}
+
+@font-face {
+  font-family: bodyFont;
+  src: url(./assets/fonts/Inter-VariableFont_opsz\,wght.woff2);
+}
+
+:root {
+  --background: #eef6f6;
+  --text-color: #264040;
+  --bg-accent: hsl(175, 70%, 40%);
+
+  --logo-size: 4vh;
+  --footer-logo-size: 8vh;
+
+  --font-sm: 1.2vh;
+  --font-md: 1.8vh;
+  --font-lg: 2.6vh;
+  --font-xl: 3.4vh;
+  --font-2xl: 5vh;
+  --font-3xl: 7vh;
+  --font-4xl: 10vh;
+}
+
+:root[forgeTheme="DARK"] {
+  --background: hsl(180, 25%, 20%);
+  --text-color: hsl(180, 30%, 95%);
+  --bg-accent: hsl(175, 70%, 40%);
+}
+
+body {
+  font-family: bodyFont;
+}
+
+::-moz-selection {
+  background: var(--bg-accent);
+  color: var(--background);
+}
+
+::selection {
+  background: var(--bg-accent);
+  color: var(--background);
+}
+
+#footerLogo {
+  color: hsla(180, 25%, 20%, 0.4);
+  -webkit-text-stroke: 1px hsla(180, 25%, 20%, 0.8);
+  font-family: "Bebas Neue", sans-serif;
+  line-height: 1;
+  transition: color ease-out 0.4s;
+}
+#footerLogo:hover {
+  color: hsl(180, 25%, 20%);
+  -webkit-text-stroke: 0px;
+}
+
+:root[forgeTheme="DARK"] #footerLogo {
+  color: hsla(180, 30%, 95%, 0.4);
+  -webkit-text-stroke: 1px hsla(180, 30%, 95%, 0.8);
+}
+:root[forgeTheme="DARK"] #footerLogo:hover {
+  color: hsl(180, 30%, 95%);
+  -webkit-text-stroke: 0px;
+}
+#footer-action-store-arrow {
+  transition: color ease-in-out 0.4s;
+}
+.footer-action-store-btn:hover #footer-action-store-arrow {
+  color: var(--bg-accent);
+}
+
+.category-image {
+  transition: all ease-in-out 0.5s;
+}
+.category-card:hover .category-image {
+  scale: 0.7;
+}
+.category-text {
+  transition: all ease-in-out 0.3s;
+}
+.category-card:hover .category-text {
+  color: var(--bg-accent);
+  transform: translateY(-5px);
+  scale: 1.1;
+}
+
+.slideImage {
+  transition: all ease-in-out 0.5s;
+}
+.sliderCardWrapper:hover .slideImage {
+  scale: 1.05;
+}
+.swiper-pagination-bullet {
+  background: var(--background);
+}
+.swiper-pagination-bullet-active {
+  background: var(--bg-accent);
+}
+
+.range-slider {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+}
+
+.range-slider::-webkit-slider-runnable-track {
+  height: 4px;
+  opacity: 1;
+  border-radius: 10px;
+}
+:root[forgeTheme="DARK"] .range-slider::-webkit-slider-runnable-track {
+  background: hsla(180, 30%, 95%, 0.5);
+}
+:root[forgeTheme="LIGHT"] .range-slider::-webkit-slider-runnable-track {
+  background: hsl(180, 25%, 20%, 0.5);
+}
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 30px;
+  height: 30px;
+  background: var(--bg-accent);
+  border-radius: 30%;
+  cursor: pointer;
+  margin-top: -12px;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
