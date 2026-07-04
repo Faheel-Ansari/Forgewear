@@ -20,8 +20,8 @@ return [
     'allowed_methods' => ['*'],
 
     'allowed_origins' => [
-        'http://localhost:5173',
-        'https://forgewear-store.vercel.app'
+        'https://forgewear-store.vercel.app',
+        'http://localhost:5173'
     ],
 
     'allowed_origins_patterns' => [],
