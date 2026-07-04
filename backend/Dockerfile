@@ -22,3 +22,7 @@ EXPOSE 80
 # Tells the container startup script to refresh settings at boot time
 ENV ERRORS 1
 ENV RUN_SCRIPTS 1
+
+
+# Start the built-in startup script that launches Nginx and PHP-FPM
+CMD ["/start.sh"]
