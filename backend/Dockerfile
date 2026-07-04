@@ -2,8 +2,15 @@ FROM richarvey/nginx-php-fpm:3.1.6
 
 COPY . /var/www/html
 
+# 1. Run composer install during build time so vendor folder is baked into the image
+RUN composer install --no-dev --optimize-autoloader --no-interaction
+
+# 2. Set the correct permissions for Laravel storage and cache directories
+RUN chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+
 # Image config
-ENV SKIP_COMPOSER 0
+# 3. Change SKIP_COMPOSER to 1 since we already ran it during build time
+ENV SKIP_COMPOSER 1
 ENV WEBROOT /var/www/html/public
 ENV PHP_ERRORS_STDERR 1
 ENV RUN_SCRIPTS 1
@@ -23,6 +30,4 @@ EXPOSE 80
 ENV ERRORS 1
 ENV RUN_SCRIPTS 1
 
-
-# Start the built-in startup script that launches Nginx and PHP-FPM
 CMD ["/start.sh"]
