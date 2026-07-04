@@ -18,3 +18,7 @@ ENV LOG_CHANNEL stderr
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 EXPOSE 80
+
+# Tells the container startup script to refresh settings at boot time
+ENV ERRORS 1
+ENV RUN_SCRIPTS 1
