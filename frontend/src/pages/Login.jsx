@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { loginSchema } from "../schema/schema";
 import { LoginForm } from "../index";
 import { NavLink, useNavigate } from "react-router-dom";
-import api, { getCSRF } from "../api/axios";
+import api from "../api/axios";
 import toast from "react-hot-toast";
 
 function Login() {
@@ -69,10 +69,14 @@ function Login() {
 
   const onSubmit = async (data) => {
     try {
-      await getCSRF();
+      // await getCSRF();
       const res = await api.post("/login", data);
 
       if (res.data.status === true) {
+        const token = res.data.access_token;
+
+        // Store the token in the browser's storage
+        localStorage.setItem("auth_token", token);
         navigate("/dashboard");
       }
     } catch (error) {

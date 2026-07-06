@@ -1,7 +1,7 @@
 import { useNavigate, NavLink, useParams } from "react-router-dom";
 import { useFieldArray, useForm } from "react-hook-form";
 import { DynamicField, AddMoreFieldBtn, StaticField } from "../../index";
-import api, { getCSRF } from "../../api/axios";
+import api from "../../api/axios";
 import { productSchema } from "../../schema/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useEffect } from "react";

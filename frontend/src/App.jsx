@@ -31,7 +31,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import { Toaster } from "react-hot-toast";
 import { useAddToCart } from "./components/cart/addToCart.js";
-import api, { getCSRF } from "./api/axios.js";
+import api from "./api/axios.js";
 import { useDispatch } from "react-redux";
 import { setImages } from "./redux-toolkit/features/MediaSlice.js";
 
@@ -48,7 +48,7 @@ function App() {
   
   const verifyUser = async () => {
     try {
-      getCSRF();
+      // getCSRF();
       const res = await api.get("/user/verify");
       if (res.data.status === true) {
         setIsLoggedIn(true);

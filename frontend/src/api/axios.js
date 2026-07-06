@@ -2,17 +2,33 @@ import axios from "axios"
 
 export const BaseURL = import.meta.env.VITE_BASE_URL
 
-export const getCSRF = async () => {
-    await axios.get(`${BaseURL}/sanctum/csrf-cookie`, {
-        withCredentials: true
-    })
-}
+// export const getCSRF = async () => {
+//     await axios.get(`${BaseURL}/sanctum/csrf-cookie`, {
+//         withCredentials: true
+//     })
+// }
 
 const appURL = import.meta.env.VITE_APP_URL
-export default axios.create({
+
+const api = axios.create({
     baseURL: appURL,
-    withCredentials: true,
-    withXSRFToken: true,
-    xsrfCookieName: "XSRF-TOKEN",
-    xsrfHeaderName: "X-XSRF-TOKEN"
+    headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    }
 })
+
+api.interceptors.request.use(
+    (config) => {
+        const token = localStorage.getItem('auth_token');
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
+
+export default api 

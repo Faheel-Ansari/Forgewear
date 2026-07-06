@@ -9,6 +9,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth');
-
 Route::get('send-email', [EmailController::class, 'sendEmail']);

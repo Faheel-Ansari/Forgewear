@@ -117,10 +117,14 @@ class AuthController extends Controller
         if (Auth::attempt(['email' => $req->email, 'password' => $req->password])) {
 
             RateLimiter::clear($throttleKey);
+            $user = Auth::user();
+            $token = $user->createToken('auth_token')->plainTextToken;
 
             return response()->json([
                 'status' => true,
-                'message' => 'You Logged in successfully.'
+                'message' => 'You Logged in successfully.',
+                'access_token' => $token,
+                'token_type' => 'Bearer',
             ], 200);
         } else {
 
@@ -135,9 +139,7 @@ class AuthController extends Controller
 
     public function logout(Request $req)
     {
-        Auth::logout();
-        $req->session()->invalidate();
-        $req->session()->regenerateToken();
+        $req->user()->currentAccessToken()->delete();
 
         return response()->json([
             'status' => true,

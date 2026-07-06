@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api, { getCSRF } from "../../api/axios";
+import api from "../../api/axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
   setError,
@@ -19,7 +19,7 @@ function ProtectedRoute({ children }) {
   const verifyUser = async () => {
     dispatch(setLoading(true));
     try {
-      getCSRF();
+      // getCSRF();
       const res = await api.get("/user/verify");
       if (res.data.status === true) {
         dispatch(setError(false));

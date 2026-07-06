@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import api, { BaseURL, getCSRF } from "../../api/axios";
+import api, { BaseURL } from "../../api/axios";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { profileSchema } from "../../schema/schema";

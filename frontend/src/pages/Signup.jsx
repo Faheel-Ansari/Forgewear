@@ -5,7 +5,7 @@ import { registerSchema } from "../schema/schema";
 import { UserRoundPlus } from "lucide-react";
 import { LoginForm } from "../index";
 import { NavLink, useNavigate } from "react-router-dom";
-import api, { BaseURL, getCSRF } from "../api/axios";
+import api, { BaseURL } from "../api/axios";
 import axios from "axios";
 
 function Signup() {
@@ -68,9 +68,14 @@ function Signup() {
 
   const onSubmit = async (data) => {
     try {
-      await getCSRF();
+      // await getCSRF();
       const res = await api.post("/signup", data);
       if (res.data.status === true) {
+        const token = res.data.access_token;
+
+        // Store the token in the browser's storage
+        localStorage.setItem("auth_token", token);
+        
         navigate("/dashboard");
       }
     } catch (error) {

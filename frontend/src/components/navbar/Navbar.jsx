@@ -1,5 +1,5 @@
 import { Logo, Navlinks, Theme } from "../../index.js";
-import api, { getCSRF } from "../../api/axios";
+import api from "../../api/axios";
 import { useEffect, useState } from "react";
 import { Handbag, Menu, X } from "lucide-react";
 import { NavLink, useLocation } from "react-router-dom";

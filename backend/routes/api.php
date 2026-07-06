@@ -69,6 +69,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/admin/{category}/{id}/change/status', [AdminProductController::class, 'changeStatus']);
 
     Route::put('/profile/update', [UserController::class, 'profileUpdate']);
+
+    Route::post('/logout', [AuthController::class, 'logout']);
 });
 
 Route::get('/media/library', [MediaLibraryController::class, 'getMediaLibrary']);

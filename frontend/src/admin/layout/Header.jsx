@@ -2,7 +2,7 @@ import { BellRing, ExternalLink, House, LogOut, Menu, X } from "lucide-react";
 import { Logo, Theme } from "../../index";
 import { motion, AnimatePresence } from "framer-motion";
 import { NavLink, useNavigate } from "react-router-dom";
-import api, { BaseURL, getCSRF } from "../../api/axios";
+import api, { BaseURL } from "../../api/axios";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../../redux-toolkit/features/AuthSlice";
@@ -23,20 +23,17 @@ function Header() {
 
   const onLogout = async () => {
     try {
-      await getCSRF();
-      const res = await axios.post(
-        `${BaseURL}/logout`,
-        {},
-        {
-          withCredentials: true,
-          withXSRFToken: true,
-        },
-      );
+      // await getCSRF();
+      const res = await api.post("/logout");
       if (res.data.status === true) {
         dispatch(setUser({}));
         navigate("/login");
       }
-    } catch (error) {}
+    } catch (error) {
+      
+    } finally {
+      localStorage.removeItem("auth_token");
+    }
   };
   return (
     <div
@@ -52,7 +49,6 @@ function Header() {
 
         {/* Right Section 1: Desktop Actions (Hidden on mobile/tablet) */}
         <div className="hidden lg:flex items-center gap-4 xl:gap-5 h-full">
-
           {/* Theme Button */}
           <Theme />
 
