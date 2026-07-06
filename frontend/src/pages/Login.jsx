@@ -69,7 +69,7 @@ function Login() {
 
   const onSubmit = async (data) => {
     try {
-      getCSRF();
+      await getCSRF();
       const res = await api.post("/login", data);
 
       if (res.data.status === true) {

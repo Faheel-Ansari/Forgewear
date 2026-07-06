@@ -37,7 +37,7 @@ class AuthController extends Controller
         $throttleKey = 'signup|' . $req->ip();
 
         // 2. Check if they hit the limit (e.g., max 3 signups/attempts per 2 minutes)
-        if (RateLimiter::tooManyAttempts($throttleKey, 1)) {
+        if (RateLimiter::tooManyAttempts($throttleKey, 3)) {
             $seconds = RateLimiter::availableIn($throttleKey);
 
             return response()->json([
@@ -58,7 +58,7 @@ class AuthController extends Controller
             return response()->json([
                 'status' => false,
                 'message' => $validation->messages()
-            ], 200);
+            ], 422);
         }
 
         $user = User::create([

@@ -68,7 +68,7 @@ function Signup() {
 
   const onSubmit = async (data) => {
     try {
-      getCSRF();
+      await getCSRF();
       const res = await api.post("/signup", data);
       if (res.data.status === true) {
         navigate("/dashboard");
