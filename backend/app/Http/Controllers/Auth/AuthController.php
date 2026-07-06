@@ -67,18 +67,17 @@ class AuthController extends Controller
             'password' => Hash::make($req->password),
         ]);
 
-        Auth::login($user);
-
-        $authUser = Auth::user();
-
-        if ($authUser) {
+        if (Auth::attempt(['email' => $req->email, 'password' => $req->password])) {
+            $authUser = Auth::user();
             RateLimiter::hit($throttleKey, 120);
-
+            $token = $authUser->createToken('auth_token')->plainTextToken;
             Mail::to($authUser->email)->send(new signupemail());
 
             return response()->json([
                 'status' => true,
                 'message' => 'User created successfully',
+                'access_token' => $token,
+                'token_type' => 'Bearer',
             ], 200);
         } else {
             return response()->json([
