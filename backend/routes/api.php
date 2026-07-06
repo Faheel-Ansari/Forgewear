@@ -32,7 +32,7 @@ Route::get('/run-queue', function (Request $request) {
     // Call the queue worker to process jobs and stop once empty
     Artisan::call('queue:work', [
         '--stop-when-empty' => true,
-        '--time-limit' => 20, // Run for a max of 20 seconds to prevent Render PHP timeouts
+        '--max-time' => 20, // Run for a max of 20 seconds to prevent Render PHP timeouts
     ]);
 
     return response()->json(['status' => 'Queue worker executed successfully']);
