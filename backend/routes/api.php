@@ -15,9 +15,28 @@ use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\User\UserOrderController;
 use App\Http\Controllers\User\UserReviewController;
 use App\Http\Controllers\UserController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/user/verify', [AuthController::class, 'verifyLogin'])->middleware('auth:sanctum');
+
+Route::get('/run-queue', function (Request $request) {
+    // Add a simple security key so strangers cannot abuse your endpoint
+    $securityKey = '@QueueSecretKey#40'; // Change this to a unique word
+
+    if ($request->query('key') !== $securityKey) {
+        return response()->json(['error' => 'Unauthorized'], 401);
+    }
+
+    // Call the queue worker to process jobs and stop once empty
+    Artisan::call('queue:work', [
+        '--stop-when-empty' => true,
+        '--time-limit' => 20, // Run for a max of 20 seconds to prevent Render PHP timeouts
+    ]);
+
+    return response()->json(['status' => 'Queue worker executed successfully']);
+});
 
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/admin/product/{category}', [AdminProductController::class, 'add']);
