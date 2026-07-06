@@ -71,7 +71,7 @@ class AuthController extends Controller
             $authUser = Auth::user();
             RateLimiter::hit($throttleKey, 120);
             $token = $authUser->createToken('auth_token')->plainTextToken;
-            // Mail::to($authUser->email)->send(new signupemail());
+            Mail::to($authUser->email)->queue(new signupemail());
 
             return response()->json([
                 'status' => true,
