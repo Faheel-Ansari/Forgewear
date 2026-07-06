@@ -23,7 +23,7 @@ Route::get('/user/verify', [AuthController::class, 'verifyLogin'])->middleware('
 
 Route::get('/run-queue', function (Request $request) {
     // Add a simple security key so strangers cannot abuse your endpoint
-    $securityKey = '@QueueSecretKey#40'; // Change this to a unique word
+    $securityKey = '@QueueSecretKey_40'; // Change this to a unique word
 
     if ($request->query('key') !== $securityKey) {
         return response()->json(['error' => 'Unauthorized'], 401);
