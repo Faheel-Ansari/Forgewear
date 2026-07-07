@@ -35,7 +35,7 @@ function CartTile({
         className={`${isItemAvailable ? "" : "grayscale-100 opacity-60"} bg-(--bg-accent)/10 rounded-xl w-20 h-20 sm:w-24 sm:h-24 md:w-28 md:h-28 flex-shrink-0 flex items-center justify-center p-1.5 border border-(--bg-accent)/10`}
       >
         <img
-          src={`${BaseURL}/uploads/productimages/${image}`}
+          src={`${BaseURL}/uploads/productImages/${image}`}
           className="w-full h-full object-contain"
           alt={title}
         />
