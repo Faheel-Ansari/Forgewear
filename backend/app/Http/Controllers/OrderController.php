@@ -128,7 +128,7 @@ class OrderController extends Controller
         $shipCharges = $order->shipCharges;
         $orderID = Hashids::encode($order->id);
 
-        Mail::to($order->email)->send(new orderemail($shippingAddress, $orderDetails, $total, $shipCharges, $orderID));
+        Mail::to($order->email)->queue(new orderemail($shippingAddress, $orderDetails, $total, $shipCharges, $orderID));
 
         return response()->json([
             'status' => true,

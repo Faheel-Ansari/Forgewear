@@ -19,6 +19,7 @@ function Signup() {
   } = useForm({ resolver: yupResolver(registerSchema) });
 
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -67,6 +68,8 @@ function Signup() {
   }, [countdown]);
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
+
     try {
       // await getCSRF();
       const res = await api.post("/signup", data);
@@ -75,7 +78,7 @@ function Signup() {
 
         // Store the token in the browser's storage
         localStorage.setItem("auth_token", token);
-        
+
         navigate("/dashboard");
       }
     } catch (error) {
@@ -95,6 +98,8 @@ function Signup() {
 
         setCountdown(secondsLeft);
       }
+    } finally {
+      setIsLoading(false);
     }
     reset();
   };
@@ -117,6 +122,7 @@ function Signup() {
           mode="signup"
           errorMessage={errorMessage}
           isBtnDisabled={isBtnDisabled}
+          isLoading={isLoading}
         />
         <p className="font-semibold flex items-center gap-2">
           Already have an account?{" "}

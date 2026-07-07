@@ -16,10 +16,10 @@ function LoginForm({
   setIsPasswordHidden,
   buttonTxt,
   isBtnDisabled,
+  isLoading,
   errorMessage,
   mode = "login",
 }) {
-  
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -126,6 +126,13 @@ function LoginForm({
             {buttonTxt} <MoveRight size={28} />
           </button>
         </>
+      ) : isLoading ? (
+        <button
+          disabled
+          className="p-3 bg-(--bg-accent)/30 text-white flex items-center justify-center gap-2 transition-colors ease-in-out duration-300 font-bold text-xl cursor-progress rounded-lg"
+        >
+          ...
+        </button>
       ) : (
         <button
           type="submit"

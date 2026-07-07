@@ -20,6 +20,7 @@ function Login() {
   } = useForm({ resolver: yupResolver(loginSchema) });
 
   const [isBtnDisabled, setIsBtnDisabled] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [countdown, setCountdown] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -68,6 +69,8 @@ function Login() {
   }, [countdown]);
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
+
     try {
       // await getCSRF();
       const res = await api.post("/login", data);
@@ -98,6 +101,8 @@ function Login() {
       } else {
         toast.error("Invalid Email or Password");
       }
+    } finally {
+      setIsLoading(false);
     }
     reset();
   };
@@ -119,6 +124,7 @@ function Login() {
           buttonTxt={"Login"}
           mode="login"
           isBtnDisabled={isBtnDisabled}
+          isLoading={isLoading}
           errorMessage={errorMessage}
         />
         <p className="font-semibold flex items-center gap-2">

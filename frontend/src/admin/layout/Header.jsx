@@ -20,8 +20,11 @@ function Header() {
   ];
 
   const [isMobileHeaderOpen, setIsMobileHeaderOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onLogout = async () => {
+    setIsLoading(true);
+
     try {
       // await getCSRF();
       const res = await api.post("/logout");
@@ -30,9 +33,9 @@ function Header() {
         navigate("/login");
       }
     } catch (error) {
-      
     } finally {
       localStorage.removeItem("auth_token");
+      setIsLoading(false);
     }
   };
   return (
@@ -62,8 +65,11 @@ function Header() {
 
           {/* Logout Trigger */}
           <button
-            onClick={onLogout}
-            className="px-4 py-2.5 rounded-xl font-bold bg-red-400/15 text-red-400 hover:bg-red-400/25 hover:text-white transition-all duration-300 cursor-pointer flex justify-center items-center gap-2 text-sm"
+            onClick={() => {
+              if (isLoading) return;
+              onLogout();
+            }}
+            className={`px-4 py-2.5 rounded-xl font-bold bg-red-400/15 ${isLoading ? "text-red-400/60 cursor-progress" : "text-red-400 hover:bg-red-400/25 hover:text-white cursor-pointer"} transition-all duration-300 flex justify-center items-center gap-2 text-sm`}
           >
             <LogOut size={18} strokeWidth={2.5} /> Logout
           </button>
