@@ -112,10 +112,10 @@ function Order() {
       } else {
         dispatch(setOrder(res.data.orders));
         dispatch(setPaginationData(res.data.pagination));
-        setTotalRevenue(res.data.stats?.totalRevenue);
-        setPendingCount(res.data.stats?.pendingCount);
-        setDeliveredCount(res.data.stats?.deliveredCount);
-        setCancelledCount(res.data.stats?.cancelledCount);
+        setTotalRevenue(res.data.stats?.totalRevenue ?? 0);
+        setPendingCount(res.data.stats?.pendingCount ?? 0);
+        setDeliveredCount(res.data.stats?.deliveredCount ?? 0);
+        setCancelledCount(res.data.stats?.cancelledCount ?? 0);
         dispatch(setIsAvailable(true));
       }
     } catch (error) {
@@ -375,7 +375,7 @@ function Order() {
                 Total Revenue
               </p>
               <p className="text-2xl sm:text-3xl font-extrabold mt-1 sm:mt-2">
-                PKR {totalRevenue.toLocaleString()}
+                PKR {totalRevenue?.toLocaleString()}
               </p>
             </div>
             <div className="bg-orange-400/10 border border-orange-400/20 text-orange-400 p-4 sm:p-6 rounded-2xl shadow-lg">
@@ -383,7 +383,7 @@ function Order() {
                 <Hourglass size={18} /> Pending Orders
               </p>
               <p className="text-2xl sm:text-3xl font-extrabold mt-1 sm:mt-2">
-                {pendingCount.toLocaleString()}
+                {pendingCount?.toLocaleString()}
               </p>
             </div>
             <div className="bg-(--bg-accent)/10 border border-(--bg-accent)/20 text-(--bg-accent) p-4 sm:p-6 rounded-2xl shadow-lg">
@@ -391,7 +391,7 @@ function Order() {
                 <CircleCheckBig size={18} /> Delivered
               </p>
               <p className="text-2xl sm:text-3xl font-extrabold mt-1 sm:mt-2">
-                {deliveredCount.toLocaleString()}
+                {deliveredCount?.toLocaleString()}
               </p>
             </div>
             <div className="bg-red-400/15 border border-red-400/20 text-red-400 p-4 sm:p-6 rounded-2xl shadow-lg">
@@ -399,7 +399,7 @@ function Order() {
                 <Ban size={18} /> Cancelled
               </p>
               <p className="text-2xl sm:text-3xl font-extrabold mt-1 sm:mt-2">
-                {cancelledCount.toLocaleString()}
+                {cancelledCount?.toLocaleString()}
               </p>
             </div>
           </div>
@@ -517,7 +517,7 @@ function Order() {
                       PKR{" "}
                       {(
                         Number(item.total) + Number(item.shipCharges)
-                      ).toLocaleString()}
+                      )?.toLocaleString()}
                     </td>
 
                     {/* Status Column */}

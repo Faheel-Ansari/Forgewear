@@ -340,7 +340,7 @@ function OrderSuccess() {
                         </span>
                       ) : (
                         <span>
-                          PKR {Number(shippingCharges).toLocaleString()}
+                          PKR {Number(order?.shipCharges).toLocaleString()}
                         </span>
                       )}
                     </div>

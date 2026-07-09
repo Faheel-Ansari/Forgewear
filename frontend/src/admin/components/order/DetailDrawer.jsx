@@ -244,7 +244,7 @@ export function OrderDetailsDrawer({ order, setDrawerOpen }) {
                     <p>
                       Price:{" "}
                       <span className="font-semibold">
-                        {Number(item.price).toLocaleString()}
+                        {Number(item?.price)?.toLocaleString()}
                       </span>
                     </p>
                   </div>
@@ -266,7 +266,10 @@ export function OrderDetailsDrawer({ order, setDrawerOpen }) {
                       Total
                     </p>
                     <p className="text-sm sm:text-base lg:text-lg font-bold">
-                      PKR {Number(item.price).toLocaleString()}
+                      PKR{" "}
+                      {(
+                        Number(item?.price) * Number(item.quantity)
+                      )?.toLocaleString()}
                     </p>
                   </div>
                 </div>
