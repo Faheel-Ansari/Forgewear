@@ -190,7 +190,8 @@ export default function Dashboard() {
     fetchReviewData();
     fetchShippingCharges();
   }, []);
-
+  console.log(totalRevenue);
+  
   // Grouping metrics for better visual hierarchy
   const businessMetrics = [
     {
