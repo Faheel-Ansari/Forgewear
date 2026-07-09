@@ -11,7 +11,6 @@ class AdminProductController extends Controller
 {
     public function add(Request $req)
     {
-
         $validation = Validator::make($req->all(), [
             'category' => 'required|string',
             'tags' => 'required',

@@ -4,7 +4,6 @@ const validateImage = (value) => {
     const supportedFormats = ['image/webp'];
     const maxSize = 500 * 1024
     if (!value || value.length === 0) return true;
-    console.log(value[0]?.type);
     return supportedFormats.includes(value[0]?.type) && value[0]?.size <= maxSize
 }
 const validateProfileImage = (value) => {
