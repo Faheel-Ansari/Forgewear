@@ -193,7 +193,7 @@ export default function Dashboard() {
   const businessMetrics = [
     {
       title: "Total Revenue",
-      value: `PKR ${totalRevenue.toLocaleString()}`,
+      value: `PKR ${totalRevenue?.toLocaleString()}`,
       icon: DollarSign,
       color: "text-green-500",
       bg: "bg-green-500/30",
@@ -202,7 +202,7 @@ export default function Dashboard() {
     },
     {
       title: "Pending Orders",
-      value: pendingOrders.length,
+      value: pendingOrders?.length,
       icon: Hourglass,
       color: "text-orange-400",
       bg: "bg-orange-400/30",
@@ -211,7 +211,7 @@ export default function Dashboard() {
     },
     {
       title: "Out of Stock",
-      value: productStats.outOfStock.toLocaleString(),
+      value: productStats?.outOfStock?.toLocaleString(),
       icon: PackageX,
       color: "text-red-400",
       bg: "bg-red-400/30",
@@ -220,7 +220,7 @@ export default function Dashboard() {
     },
     {
       title: "Disabled Products",
-      value: productStats.disabledProducts.toLocaleString(),
+      value: productStats?.disabledProducts?.toLocaleString(),
       icon: Ban,
       color: "text-slate-400",
       bg: "bg-slate-400/30",
@@ -232,7 +232,7 @@ export default function Dashboard() {
   const userBusinessMetrics = [
     {
       title: "Total Spending",
-      value: `PKR ${userTotalSpending.toLocaleString()}`,
+      value: `PKR ${userTotalSpending?.toLocaleString()}`,
       icon: DollarSign,
       color: "text-green-500",
       bg: "bg-green-500/30",
@@ -241,7 +241,7 @@ export default function Dashboard() {
     },
     {
       title: "Total Orders",
-      value: userOrderData?.length.toLocaleString(),
+      value: userOrderData?.length?.toLocaleString(),
       icon: ShoppingBag,
       color: "text-purple-400",
       bg: "bg-purple-400/30",
@@ -250,7 +250,7 @@ export default function Dashboard() {
     },
     {
       title: "Pending Orders",
-      value: userPendingOrders?.length.toLocaleString(),
+      value: userPendingOrders?.length?.toLocaleString(),
       icon: Hourglass,
       color: "text-orange-400",
       bg: "bg-orange-400/30",
@@ -259,7 +259,7 @@ export default function Dashboard() {
     },
     {
       title: "Delivered Orders",
-      value: userDeliveredOrders?.length.toLocaleString(),
+      value: userDeliveredOrders?.length?.toLocaleString(),
       icon: Hourglass,
       color: "text-(--bg-accent)",
       bg: "bg-(--bg-accent)/30",
@@ -271,7 +271,7 @@ export default function Dashboard() {
   const inventoryMetrics = [
     {
       title: "Shirts",
-      value: productStats.shirts.toLocaleString(),
+      value: productStats?.shirts?.toLocaleString(),
       icon: Shirt,
       color: "text-blue-400",
       bg: "bg-blue-400/30",
@@ -280,7 +280,7 @@ export default function Dashboard() {
     },
     {
       title: "Pants",
-      value: productStats.pants.toLocaleString(),
+      value: productStats?.pants?.toLocaleString(),
       icon: Scissors,
       color: "text-indigo-400",
       bg: "bg-indigo-400/30",
@@ -289,7 +289,7 @@ export default function Dashboard() {
     },
     {
       title: "Hoodies",
-      value: productStats.hoodies.toLocaleString(),
+      value: productStats?.hoodies?.toLocaleString(),
       icon: Tag,
       color: "text-purple-400",
       bg: "bg-purple-400/30",
@@ -298,7 +298,7 @@ export default function Dashboard() {
     },
     {
       title: "Jackets",
-      value: productStats.jackets.toLocaleString(),
+      value: productStats?.jackets?.toLocaleString(),
       icon: Layers,
       color: "text-cyan-400",
       bg: "bg-cyan-400/30",
@@ -307,7 +307,7 @@ export default function Dashboard() {
     },
     {
       title: "Shoes",
-      value: productStats.shoes.toLocaleString(),
+      value: productStats?.shoes?.toLocaleString(),
       icon: Footprints,
       color: "text-orange-400",
       bg: "bg-orange-400/30",
@@ -319,7 +319,7 @@ export default function Dashboard() {
   const reviewMetrics = [
     {
       title: "Total Reviews",
-      value: reviews?.length.toLocaleString(),
+      value: reviews?.length?.toLocaleString(),
       icon: MessageSquare,
       color: "text-teal-400",
       bg: "bg-teal-400/30",
