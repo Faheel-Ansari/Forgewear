@@ -172,6 +172,8 @@ function Checkout() {
   const onSubmit = async (shipAndPayDetails) => {
     if (isBtnDisabled) return;
 
+    setIsBtnDisabled(true);
+
     const validate = await api.get(`/validate/${ids}`);
 
     if (validate.data.status === false) {
@@ -179,8 +181,6 @@ function Checkout() {
       navigate("/cart");
       return;
     }
-
-    setIsBtnDisabled(true);
 
     const formData = new FormData();
 
@@ -243,7 +243,6 @@ function Checkout() {
         setIsBtnDisabled(false);
       }
     } catch (error) {
-
       if (error.response && error.response.status === 429) {
         const serverMessage =
           error.response.data.message || "Too many attempts.";
@@ -727,11 +726,11 @@ function Checkout() {
             )}
             {/* Submit Button */}
             <button
-              type="submit"
+              type={isBtnDisabled ? "button" : "submit"}
               disabled={isBtnDisabled}
               className={`w-full ${isBtnDisabled ? "bg-gray-400/30 text-gray-400 cursor-not-allowed" : "bg-(--text-color) text-(--background) hover:bg-(--bg-accent) hover:text-(--text-color) active:bg-(--bg-accent)/60 cursor-pointer shadow-md hover:-translate-y-0.5"} font-black py-4 rounded-xl transition-all duration-300 tracking-wider uppercase text-sm sm:text-base`}
             >
-              COMPLETE PURCHASE
+              {isBtnDisabled ? "Processing..." : "COMPLETE PURCHASE"}
             </button>
           </form>
         </div>
