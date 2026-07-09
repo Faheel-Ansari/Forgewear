@@ -1,5 +1,8 @@
 FROM richarvey/nginx-php-fpm:3.1.6
 
+# Install PHP bcmath extension needed by Hashids
+RUN docker-php-ext-install bcmath
+
 COPY . /var/www/html
 
 # 1. Run composer install during build time so vendor folder is baked into the image
