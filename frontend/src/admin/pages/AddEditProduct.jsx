@@ -4,13 +4,14 @@ import { DynamicField, AddMoreFieldBtn, StaticField } from "../../index";
 import api from "../../api/axios";
 import { productSchema } from "../../schema/schema";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { ArrowLeft, X } from "lucide-react";
 
 function AddEditProduct() {
   const navigate = useNavigate();
   const { category, mode, id } = useParams();
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchData = async (id) => {
     if (mode === "edit") {
@@ -75,6 +76,8 @@ function AddEditProduct() {
   } = useFieldArray({ control, name: "colors" });
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
+
     data.colors.map((e) => {
       if (!e.value.startsWith("#")) {
         e.value = "#" + e.value;
@@ -113,13 +116,15 @@ function AddEditProduct() {
             "Content-Type": "multipart/form-data",
           },
         });
-        
+
         if (res.data.status === true) {
           toast.success(res.data.message);
         }
         reset();
       } catch (err) {
         toast.error("Something went wrong!");
+      }finally {
+        setIsLoading(false);
       }
     }
     if (mode === "edit") {
@@ -139,7 +144,10 @@ function AddEditProduct() {
           toast.success(res.data.message);
           navigate(`/dashboard/product/${category}`);
         }
-      } catch (err) {}
+      } catch (err) {
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
   return (
@@ -477,10 +485,10 @@ function AddEditProduct() {
             ))}
             <div className="mt-8 sm:mt-10 flex justify-center w-full">
               <button
-                type="submit"
-                className="w-full py-3.5 rounded-2xl font-bold bg-(--bg-accent) text-(--background) border-2 border-(--bg-accent) hover:bg-(--text-color) hover:text-(--background) hover:border-(--text-color) transition-all duration-300 cursor-pointer text-sm sm:text-base lg:text-lg shadow-sm"
+                type={isLoading ? 'button': 'submit'}
+                className={`w-full py-3.5 rounded-2xl font-bold ${isLoading ? 'cursor-progress' : ' hover:bg-(--text-color) hover:text-(--background) hover:border-(--text-color) cursor-pointer'} bg-(--bg-accent) text-(--background) border-2 border-(--bg-accent) transition-all duration-300 text-sm sm:text-base lg:text-lg shadow-sm`}
               >
-                Save Product
+                {isLoading ? 'Saving...' : 'Save Product'}
               </button>
             </div>
           </div>

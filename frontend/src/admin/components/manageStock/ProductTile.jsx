@@ -22,6 +22,7 @@ function ProductTile({
   method,
   stock = false,
   status = false,
+  isLoading
 }) {
   return (
     <div className="group relative overflow-hidden p-4 sm:p-5 md:px-8 border border-(--text-color)/10 hover:border-(--bg-accent)/20 bg-gradient-to-r from-(--text-color)/2 to-transparent rounded-2xl flex flex-col md:flex-row md:items-center md:justify-between gap-4 sm:gap-6 shadow-md backdrop-blur-lg transition-all duration-300">
@@ -106,6 +107,7 @@ function ProductTile({
           (productStatus !== "" && productStatus ? (
             <SortBtn
               method={method}
+              isLoading={isLoading}
               id={id}
               icon={<CircleOff size={16} strokeWidth={2.5} />}
               text={"Disable"}
@@ -114,6 +116,7 @@ function ProductTile({
           ) : (
             <SortBtn
               method={method}
+              isLoading={isLoading}
               id={id}
               icon={<Check size={16} strokeWidth={2.5} />}
               text={"Enable"}
@@ -124,6 +127,7 @@ function ProductTile({
           (avail !== "" && avail ? (
             <SortBtn
               method={method}
+              isLoading={isLoading}
               id={id}
               icon={<PackageX size={16} strokeWidth={2.5} />}
               text={"Mark as Out of Stock"}
@@ -132,6 +136,7 @@ function ProductTile({
           ) : (
             <SortBtn
               method={method}
+              isLoading={isLoading}
               id={id}
               icon={<PackageCheck size={16} strokeWidth={2.5} />}
               text={"Mark as In Stock"}

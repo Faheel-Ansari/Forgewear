@@ -45,6 +45,7 @@ function ProductCategory() {
 
   const perPage = 20;
 
+  const [isLoading, setIsLoading] = useState(false);
   const [isDeleteSelected, setIsDeleteSelected] = useState(false);
   const [itemsToDelete, setItemsToDelete] = useState([]);
   const [currentPageNo, setCurrentPageNo] = useState(1);
@@ -74,6 +75,8 @@ function ProductCategory() {
   };
 
   const deleteAll = async (items) => {
+    setIsLoading(true);
+
     try {
       const res = await api.delete(`/admin/product/${category}`, {
         data: items,
@@ -88,6 +91,10 @@ function ProductCategory() {
       }
     } catch (error) {
       toast.error("Something went wrong!");
+    } finally {
+      setIsLoading(false);
+      setIsDeleteSelected(false)
+      setItemsToDelete([])
     }
   };
 
@@ -244,16 +251,19 @@ function ProductCategory() {
                 Cancel
               </button>
               <button
-                onClick={() => deleteAll(itemsToDelete)}
+                onClick={() => {
+                  if (isLoading || itemsToDelete.length <= 0) return;
+                  deleteAll(itemsToDelete);
+                }}
                 disabled={itemsToDelete.length <= 0}
                 className={`${
                   itemsToDelete.length <= 0
-                    ? "bg-(--text-color)/25 text-(--background) cursor-not-allowed"
-                    : "bg-red-400 hover:bg-red-400/80 text-(--background) cursor-pointer"
+                    ? `bg-(--text-color)/25 text-(--background) cursor-not-allowed`
+                    : `${isLoading ? "cursor-progress" : "hover:bg-red-400/80 cursor-pointer"} bg-red-400 text-(--background)`
                 } py-2.5 px-4 sm:py-3 sm:px-5 font-bold rounded-xl sm:rounded-2xl text-sm sm:text-base lg:text-lg flex justify-center items-center gap-1.5 transition-colors ease-in-out duration-300 backdrop-blur-lg`}
               >
-                <Trash2 size={18} strokeWidth={2.5} /> Delete{" "}
-                {`(${itemsToDelete.length})`}
+                <Trash2 size={18} strokeWidth={2.5} />
+                {isLoading ? "Deleting..." : `Delete (${itemsToDelete.length})`}
               </button>
             </>
           ) : (

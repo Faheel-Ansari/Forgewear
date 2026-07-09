@@ -79,12 +79,8 @@ function Home({
     setLoading(true);
     try {
       const res = await api.get(`/home/bestseller`);
-      console.log(res);
-
       parseProducts(res, setBestSellerProducts);
     } catch (error) {
-      console.error(error.response.data);
-
       setError(true);
     } finally {
       setLoading(false);
@@ -96,11 +92,8 @@ function Home({
     setLoading(true);
     try {
       const res = await api.get(`/home/newarrival`);
-      console.log(res);
-
       parseProducts(res, setNewArrivalProducts);
     } catch (error) {
-      console.error(error.response.data);
       setError(true);
     } finally {
       setLoading(false);

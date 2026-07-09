@@ -35,6 +35,7 @@ function StockCategory() {
 
   const perPage = 20;
 
+  const [isLoading, setIsLoading] = useState(false);
   const [isActive, setIsActive] = useState(1);
   const [formattedQuery, setFormattedQuery] = useState("");
   const [currentPageNo, setCurrentPageNo] = useState(1);
@@ -47,6 +48,8 @@ function StockCategory() {
   };
 
   const changeStock = async (id) => {
+    setIsLoading(true)
+
     dispatch(setError(false));
 
     try {
@@ -61,6 +64,8 @@ function StockCategory() {
       }
     } catch (error) {
       dispatch(setError(true));
+    }finally{
+      setIsLoading(false)
     }
   };
 
@@ -185,6 +190,7 @@ function StockCategory() {
                 title={e.title}
                 avail={e.avail}
                 method={changeStock}
+                isLoading={isLoading}
                 stock={true}
               />
             ))}

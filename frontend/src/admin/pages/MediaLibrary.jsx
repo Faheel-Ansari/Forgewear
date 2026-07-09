@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import api from "../../api/axios";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { mediaLibrarySchema } from "../../schema/schema";
+import { useState } from "react";
+import toast from "react-hot-toast";
 
 const fieldsArr = [
   {
@@ -56,7 +58,11 @@ function MediaLibrary() {
     resolver: yupResolver(mediaLibrarySchema),
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const onSubmit = async (data) => {
+    setIsLoading(true)
+
     const formData = new FormData();
 
     Object.keys(data).forEach((key) => {
@@ -75,9 +81,10 @@ function MediaLibrary() {
         headers: { "Content-Type": "multipart/form-data" },
       });
 
-      console.log(res);
     } catch (error) {
-      console.error(error.response.data);
+      toast.error('Something went wrong!')
+    }finally{
+      setIsLoading(false)
     }
   };
 
@@ -109,11 +116,11 @@ function MediaLibrary() {
         {/* SUBMIT ROW */}
         <div className="mt-8 sm:mt-10 flex justify-center sm:justify-start w-full">
           <button
-            type="submit"
-            className="w-full max-w-xs sm:max-w-md py-3.5 rounded-2xl font-bold text-base sm:text-lg bg-(--bg-accent) text-(--background) hover:text-(--background) hover:bg-(--text-color) flex items-center justify-center gap-3 transition-all duration-300 cursor-pointer shadow-sm"
+            type={isLoading ? "button" : "submit"}
+            className={`w-full max-w-xs sm:max-w-md py-3.5 rounded-2xl font-bold text-base sm:text-lg ${isLoading ? 'cursor-progress' : 'hover:text-(--background) hover:bg-(--text-color) cursor-pointer'} bg-(--bg-accent) text-(--background) flex items-center justify-center gap-3 transition-all duration-300 shadow-sm`}
           >
             <SaveAll size={20} strokeWidth={2.5} className="sm:scale-110" />
-            Save Library
+            {isLoading ? 'Saving...' : 'Save Library'}
           </button>
         </div>
       </form>

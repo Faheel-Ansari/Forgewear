@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import { faqSchema } from "../../schema/schema";
 import api from "../../api/axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { ArrowLeft } from "lucide-react";
 
@@ -23,12 +23,15 @@ function AddEditFAQ() {
     },
   });
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const fetchData = async (id) => {
     if (mode === "edit") {
       try {
         const res = await api.get(`/admin/faq/edit/${id}`);
         if (res.data.status === true) {
           const editData = res.data.faq;
+
           reset({
             question: editData.question,
             answer: editData.answer,
@@ -41,7 +44,10 @@ function AddEditFAQ() {
   };
 
   const onSubmit = async (data) => {
+    setIsLoading(true);
+
     const formData = new FormData();
+
     formData.append("question", data.question);
     formData.append("answer", data.answer);
     if (mode === "add") {
@@ -55,7 +61,11 @@ function AddEditFAQ() {
         } else {
           toast.error(res.data.message);
         }
-      } catch (error) {}
+      } catch (error) {
+        toast.error("Something went wrong!");
+      } finally {
+        setIsLoading(false);
+      }
     } else {
       formData.append("_method", "PUT");
       try {
@@ -68,7 +78,11 @@ function AddEditFAQ() {
         } else {
           toast.error(res.data.message);
         }
-      } catch (error) {}
+      } catch (error) {
+        toast.error("Something went wrong!");
+      } finally {
+        setIsLoading(false);
+      }
     }
   };
 
@@ -151,10 +165,10 @@ function AddEditFAQ() {
         {/* SUBMIT BUTTON ROW */}
         <div className="w-full mt-4 sm:mt-6">
           <button
-            type="submit"
-            className="w-full py-2.5 sm:py-3.5 rounded-2xl font-bold text-sm sm:text-base lg:text-lg bg-(--bg-accent) text-(--text-color) border-2 border-(--bg-accent) hover:bg-(--text-color) hover:text-(--background) hover:border-(--text-color) transition-all duration-300 cursor-pointer shadow-sm"
+            type={isLoading ? "button" : "submit"}
+            className={`w-full py-2.5 sm:py-3.5 rounded-2xl font-bold text-sm sm:text-base lg:text-lg ${isLoading ? "cursor-progress" : "hover:bg-(--text-color) hover:text-(--background) hover:border-(--text-color) cursor-pointer"} bg-(--bg-accent) text-(--text-color) border-2 border-(--bg-accent) transition-all duration-300 shadow-sm`}
           >
-            Save FAQ
+            {isLoading ? "Saving..." : "Save FAQ"}
           </button>
         </div>
       </form>

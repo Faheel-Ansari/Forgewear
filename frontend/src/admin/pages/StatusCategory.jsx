@@ -30,6 +30,7 @@ function StatusCategory() {
 
   const perPage = 20;
 
+  const [isLoading, setIsLoading] = useState(false);
   const [isActive, setIsActive] = useState(1);
   const [formattedQuery, setFormattedQuery] = useState("");
   const [currentPageNo, setCurrentPageNo] = useState(1);
@@ -42,6 +43,8 @@ function StatusCategory() {
   };
 
   const changeStatus = async (id) => {
+    setIsLoading(true)
+    
     dispatch(setError(false));
 
     try {
@@ -55,6 +58,8 @@ function StatusCategory() {
       }
     } catch (error) {
       dispatch(setError(true));
+    }finally{
+      setIsLoading(false)
     }
   };
 
@@ -177,6 +182,7 @@ function StatusCategory() {
                 avail={e.avail}
                 method={changeStatus}
                 productStatus={e.status}
+                isLoading={isLoading}
                 status={true}
               />
             ))}
