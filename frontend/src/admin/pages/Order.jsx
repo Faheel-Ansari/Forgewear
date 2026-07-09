@@ -105,7 +105,8 @@ function Order() {
       dispatch(setLoading(true));
 
       const res = await api.get(query);
-
+      console.log(res);
+      
       if (res.data.status === false) {
         dispatch(setIsAvailable(false));
         dispatch(setOrder([]));
