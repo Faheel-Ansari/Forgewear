@@ -113,11 +113,15 @@ function AddEditProduct() {
             "Content-Type": "multipart/form-data",
           },
         });
+        console.log(res);
+
         if (res.data.status === true) {
           toast.success(res.data.message);
         }
         reset();
       } catch (err) {
+        console.error(err.response.data);
+
         toast.error("Something went wrong!");
       }
     }
