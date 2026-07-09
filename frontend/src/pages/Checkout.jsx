@@ -243,7 +243,6 @@ function Checkout() {
         setIsBtnDisabled(false);
       }
     } catch (error) {
-      console.error(error.response.data);
 
       if (error.response && error.response.status === 429) {
         const serverMessage =
