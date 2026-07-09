@@ -75,6 +75,8 @@ export default function Dashboard() {
   const fetchOrderData = async () => {
     try {
       const res = await api.get("/admin/dashboard/order");
+      console.log(res);
+      
       if (res.data.status) {
         setRecentOrders(res.data.orders);
         setOrderData(res.data.chartData);
