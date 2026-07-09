@@ -45,6 +45,7 @@ export default function Dashboard() {
   const [totalRevenue, setTotalRevenue] = useState(0);
   const [userOrderData, setUserOrderData] = useState([]);
   const [shippingCharges, setShippingCharges] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     register,
@@ -59,6 +60,8 @@ export default function Dashboard() {
   });
 
   const fetchShippingCharges = async () => {
+    setIsLoading(true);
+
     try {
       const res = await api.get("/admin/shipcharges");
 
@@ -69,13 +72,14 @@ export default function Dashboard() {
       }
     } catch (error) {
       setShippingCharges(0);
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const fetchOrderData = async () => {
     try {
       const res = await api.get("/admin/dashboard/order");
-      console.log(res);
 
       if (res.data.status) {
         setRecentOrders(res.data.orders);
@@ -190,8 +194,7 @@ export default function Dashboard() {
     fetchReviewData();
     fetchShippingCharges();
   }, []);
-  console.log(typeof(totalRevenue));
-
+  
   // Grouping metrics for better visual hierarchy
   const businessMetrics = [
     {
@@ -653,10 +656,10 @@ export default function Dashboard() {
               className="w-20 bg-(--text-color)/10 p-2 outline-0 rounded-lg"
             />
             <button
-              type="submit"
-              className="bg-(--bg-accent)/20 text-(--bg-accent) px-4 py-2 rounded-lg font-bold"
+              type={isLoading ? "button" : "submit"}
+              className={`${isLoading ? "cursor-progress" : "hover:bg-(--bg-accent)/50 hover:text-white cursor-pointer"} bg-(--bg-accent)/20 text-(--bg-accent) px-4 py-2 rounded-lg font-bold transition-colors ease-in-out duration-200`}
             >
-              Save
+              {isLoading ? "Saving..." : "Save"}
             </button>
           </form>
           {errors.charges?.message && (
