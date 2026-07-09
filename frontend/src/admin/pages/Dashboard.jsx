@@ -76,11 +76,11 @@ export default function Dashboard() {
     try {
       const res = await api.get("/admin/dashboard/order");
       console.log(res);
-      
+
       if (res.data.status) {
         setRecentOrders(res.data.orders);
         setOrderData(res.data.chartData);
-        setTotalRevenue(res.data.totalRevenue);
+        setTotalRevenue(res.data.totalRevenue ?? 0);
         setUserOrderData(res.data.userOrders);
       } else {
         setRecentOrders([]);
@@ -190,8 +190,8 @@ export default function Dashboard() {
     fetchReviewData();
     fetchShippingCharges();
   }, []);
-  console.log(totalRevenue);
-  
+  console.log(typeof(totalRevenue));
+
   // Grouping metrics for better visual hierarchy
   const businessMetrics = [
     {
