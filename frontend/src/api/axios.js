@@ -1,12 +1,12 @@
 import axios from "axios"
 
-export const BaseURL = import.meta.env.VITE_BASE_URL
-
 // export const getCSRF = async () => {
 //     await axios.get(`${BaseURL}/sanctum/csrf-cookie`, {
 //         withCredentials: true
 //     })
 // }
+
+export const BaseURL = import.meta.env.VITE_BASE_URL
 
 const appURL = import.meta.env.VITE_APP_URL
 
