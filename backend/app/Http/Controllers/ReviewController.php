@@ -70,7 +70,7 @@ class ReviewController extends Controller
 
     public function verifyToWriteReview($productID)
     {
-        $user = Auth::user()?->id;
+        $user = Auth::user();
         $intProductID = (int) $productID;
 
         if (!$user) {
@@ -81,7 +81,7 @@ class ReviewController extends Controller
         }
 
         $order = Order::join('order_details', 'orders.id', '=', 'order_details.orderID')
-            ->where('orders.user_id', '=', $user)
+            ->where('orders.user_id', '=', $user?->id)
             ->where('order_details.productID', '=', $intProductID)
             ->where('orders.status', '=', 'delivered')
             ->first();
