@@ -33,6 +33,7 @@ export function useReview() {
             dispatch(setLoading(false));
 
             const res = await api.get(`/review/detail/${id}`);
+            console.log(res);
             
             if (res.data.status === true) {
                 dispatch(setIsAvailable(true));
