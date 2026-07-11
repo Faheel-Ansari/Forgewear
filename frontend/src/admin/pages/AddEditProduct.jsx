@@ -140,11 +140,15 @@ function AddEditProduct() {
             },
           },
         );
+        console.log(res);
+        
         if (res.data.status === true) {
           toast.success(res.data.message);
           navigate(`/dashboard/product/${category}`);
         }
       } catch (err) {
+        console.error(err.response.data);
+        
       } finally {
         setIsLoading(false);
       }
