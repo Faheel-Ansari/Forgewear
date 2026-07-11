@@ -54,7 +54,7 @@ class OrderController extends Controller
             ], 422);
         }
 
-        $user = Auth::user();
+        $user = Auth::guard('sanctum')->user();
 
         $order = Order::create([
             'user_id' => $user ? $user->id : null,
