@@ -47,10 +47,17 @@ class ReviewController extends Controller
             ], 422);
         }
 
-        $userID = Auth::guard('sanctum')->user()->id || null;
+        $userID = Auth::guard('sanctum')->user();
+        return $userID;
+        if (!$userID) {
+            return response()->json([
+                'status' => false,
+                'message' => 'User not authenticated'
+            ], 401);
+        }
 
         $review = Review::create([
-            'user_id' => $userID,
+            'user_id' => $userID->id,
             'product_id' => $req->product_id,
             'rating' => $req->rating,
             'review' => $req->message != "" ? $req->message : null,
