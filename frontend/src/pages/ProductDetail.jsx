@@ -104,6 +104,7 @@ function ProductDetail({
   const verifyToWriteReview = async () => {
     try {
       const res = await api.get(`/review/verification/${id}`);
+      console.log(res);
       
       if (res.data.status) {
         setIsVerifiedToWriteReview(true);

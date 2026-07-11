@@ -81,7 +81,7 @@ class ReviewController extends Controller
         }
 
         $order = Order::join('order_details', 'orders.id', '=', 'order_details.orderID')
-            ->where('orders.user_id', '=', $user?->id)
+            ->where('orders.user_id', '=', $user->id)
             ->where('order_details.productID', '=', $intProductID)
             ->where('orders.status', '=', 'delivered')
             ->first();
