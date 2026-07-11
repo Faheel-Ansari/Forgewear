@@ -77,6 +77,7 @@ function ProductDetail({
     dispatch(setLoadingSingle(true));
     try {
       const res = await api.get(`/${tab}/${id}/single`);
+      
       if (res.data.status === true) {
         const product = res.data.singleProduct;
         const parsedProduct = {
