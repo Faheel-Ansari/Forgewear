@@ -90,6 +90,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::put('/profile/update', [UserController::class, 'profileUpdate']);
 
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::get('/review/verification/{productID}', [ReviewController::class, 'verifyToWriteReview']);
 });
 
 Route::get('/media/library', [MediaLibraryController::class, 'getMediaLibrary']);
@@ -112,7 +113,6 @@ Route::get('/faq', [FAQController::class, 'getAllFaq']);
 Route::get('/review/home', [ReviewController::class, 'getAllReview']);
 Route::get('/review/detail/{id}', [ReviewController::class, 'getDetailReview']);
 Route::post('/review/add', [ReviewController::class, 'addReview']);
-Route::get('/review/verification/{productID}', [ReviewController::class, 'verifyToWriteReview']);
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/signup', [AuthController::class, 'signUp']);
