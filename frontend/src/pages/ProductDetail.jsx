@@ -321,7 +321,7 @@ function ProductDetail({
       <div className="w-full max-w-[1440px] xl:max-w-[1680px] px-4 sm:px-6 md:px-8 lg:px-10 max-h-[70vh] md:max-h-[60vh] relative flex flex-col gap-6 sm:gap-8 mb-24">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-(--text-color)/5 pb-4">
           <h4 className="text-xl sm:text-2xl font-black flex flex-wrap items-center gap-3 tracking-tight">
-            Reviews {Number(reviewsCount)?.toLocaleString() ?? 0}{" "}
+            Reviews {Number(reviewsCount)?.toLocaleString() || 0}{" "}
             <span className="flex items-center gap-1 font-semibold text-sm sm:text-lg text-(--text-color)/60">
               ({ratingAverage.toFixed(1)}{" "}
               <Star
