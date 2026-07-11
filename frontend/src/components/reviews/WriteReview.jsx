@@ -60,6 +60,8 @@ function WriteReview({ id, setToggleWriteReview }) {
 
     try {
       const res = await api.post(`/review/add`, formData);
+      console.log(res);
+      
       if (res.data.status === true) {
         toast.success(res.data.message);
         fetchDetailReviews(id);
