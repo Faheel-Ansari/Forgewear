@@ -48,7 +48,7 @@ class ReviewController extends Controller
         }
 
         $userID = Auth::guard('sanctum')->user();
-        return $userID;
+        
         if (!$userID) {
             return response()->json([
                 'status' => false,
