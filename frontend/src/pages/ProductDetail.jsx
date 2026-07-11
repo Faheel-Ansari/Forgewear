@@ -28,6 +28,7 @@ import { FilePenLine, Frown, Search, Star } from "lucide-react";
 import { useFetchData } from "../components/store/fetchData";
 import { useAddToCart } from "../components/cart/addToCart";
 import { usePagination } from "../components/store/pagination";
+import { useReview } from "../components/reviews/review";
 
 function ProductDetail({
   page,
@@ -62,6 +63,7 @@ function ProductDetail({
   const perPage = 20;
 
   const { fetchData } = useFetchData();
+  const { fetchDetailReviews } = useReview();
   const { handlePageChange, paginationData } = usePagination(tab, page);
 
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -123,6 +125,7 @@ function ProductDetail({
 
   useEffect(() => {
     fetchSingleData();
+    fetchDetailReviews()
     verifyToWriteReview();
   }, [id, tab]);
 
