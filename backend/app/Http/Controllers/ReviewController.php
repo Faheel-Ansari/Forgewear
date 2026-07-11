@@ -47,7 +47,7 @@ class ReviewController extends Controller
             ], 422);
         }
 
-        $userID = Auth::check() ? Auth::id() : null;
+        $userID = Auth::guard('sanctum')->user()->id || null;
 
         $review = Review::create([
             'user_id' => $userID,
