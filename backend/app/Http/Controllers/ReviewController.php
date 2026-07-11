@@ -71,6 +71,7 @@ class ReviewController extends Controller
     public function verifyToWriteReview($productID)
     {
         $user = Auth::user();
+        return $user;
         $intProductID = (int) $productID;
 
         if (!$user) {
