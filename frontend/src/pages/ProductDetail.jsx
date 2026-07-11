@@ -55,7 +55,8 @@ function ProductDetail({
   const reviewsCount = useSelector((state) => state.review.reviewsCount);
   const reviews = useSelector((state) => state.review.reviews);
   const images = useSelector((state) => state.media.images);
-
+  console.log(reviewsCount);
+  
   const { searchTab, setActiveSearchTab } = switchSearchTab();
   const { searchCardArr } = useSearchCard(images);
 
