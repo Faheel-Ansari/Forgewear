@@ -12,8 +12,8 @@ class ReviewController extends Controller
 {
     public function getAllReview()
     {
-        $reviews = Review::leftJoin('users', 'users.id', '=', 'reviews.user_id')->select('users.name', 'users.photo', 'reviews.*')->where('reviews.status','=','public')->limit(60)->get();
-        $reviewCount = Review::where('status','public')->count();
+        $reviews = Review::leftJoin('users', 'users.id', '=', 'reviews.user_id')->select('users.name', 'users.photo', 'reviews.*')->where('reviews.status', '=', 'public')->limit(60)->get();
+        $reviewCount = Review::where('status', 'public')->count();
         return response()->json([
             'status' => true,
             'reviews' => $reviews,
@@ -23,11 +23,13 @@ class ReviewController extends Controller
 
     public function getDetailReview($id)
     {
-        $reviews = Review::leftJoin('users', 'users.id', '=', 'reviews.user_id')->where('reviews.product_id', $id)->select('users.name', 'users.photo', 'reviews.*')->where('reviews.status','=','public')->get();
+        $reviews = Review::leftJoin('users', 'users.id', '=', 'reviews.user_id')->where('reviews.product_id', $id)->select('users.name', 'users.photo', 'reviews.*')->where('reviews.status', '=', 'public')->get();
+        $reviewCount = Review::leftJoin('users', 'users.id', '=', 'reviews.user_id')->where('reviews.product_id', $id)->select('users.name', 'users.photo', 'reviews.*')->where('reviews.status', '=', 'public')->count();
 
         return response()->json([
             'status' => true,
             'reviews' => $reviews,
+            'reviewCount' => $reviewCount,
         ], 200);
     }
 
